@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Restaurant Website</title>
+  <link rel="stylesheet" type="text/css" href="style2.css">
+
+  <!--box icons-->
+  <link rel="stylesheet"
+  href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
+  <!--google fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?
+      family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+   /* 🔹 Navbar Styling   of home*/
+   .home-header{
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9999; /* Make it higher than the rest of the elements*/
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+        }
+
+
+       .home-header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-left: 10px;
+            color: azure;
+        }
+
+       .home-header nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin-left: -600px;
+        }
+
+       .home-header nav ul li {
+            display: inline-block;
+
+        }
+
+       .home-header nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 22px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+            font-weight: 700;
+        }
+
+       .home-header nav ul li a:hover {
+            background: #ff9800;
+            color: black;
+        }
+</style>
+
+
+</head>
+<body>
+
+<!--home header-->
+<header class="home-header">
+  <h1 style="position: relative; top: -10px;"><i class='bx bx-cart' style="font-size: 45px; position: relative; top: 10px;"></i> Luxury Shopping Mall</h1> <!--name of mall-->
+  <nav class="nav-links">
+      <ul>
+          <li><a href="index.html"> Home</a></li>
+          <li><a href="clothes.html"> Fashion Store</a></li>
+          <li><a href="index1.html"> Phone Store</a></li>
+          <li><a href="#">Restaurant</a></li>
+          <li><a href="cinema.html">Cinema</a></li>
+      </ul>
+  </nav>
+</header>
+
+
+
+
+  <!---header-->
+  <header class="res-header">
+    <a href="#" class="logo"><i class='bx bxs-home'></i>Grills</a>
+
+    <ul class="navlist">
+      <li><a href="#home" class="active">HOME</a></li>
+      <li><a href="#about">ABOUT US</a></li>
+      <li><a href="#search-all">SEARCH</a></li>
+      <li><a href="#shop">MENU</a></li>
+      <li><a href="#review">CHEFS</a></li>
+      <li><a href="#reservation">RESERVATION</a></li>
+    </ul>
+
+    <div class="nav-icons">
+      <a href="https://en.wikipedia.org/wiki/Grilling"><i class='bx bx-search'></i></a>
+      <a href="#"><i class='bx bx-cart'></i></a>
+    </div>
+  </header>
+
+  <!--home-->
+  <section class="home" id="home">
+    <div class="home-text">
+      <h1>Meet, <span>Eat &</span> Enjoy The true taste</h1>
+      <a href="#shop" class="btn">Explore Menu<i class='bx bxs-right-arrow'></i></a>
+      <a href="#contact" class="btn2">Order Now</a>
+    </div>
+     
+    <div class="home-img">
+      <img src="s.jpg">
+    </div>
+
+  </section>
+
+  <!--contaniner-->
+  <section class="contaniner" id="contaniner">
+    <div class="contaniner-box">
+     <img src="c1.png">
+     <h3>11:00 am - 8:00pm</h3>
+     <a href="#">Working Hours</a>
+    </div>
+
+     <div class="contaniner-box">
+      <img src="c2.png">
+      <h3>Jib Jenin, public street</h3>
+      <a href="#">Get Directions</a>
+     </div>
+
+     <div class="contaniner-box">
+      <img src="c3.png">
+      <h3>03 985 643</h3>
+      <a href="#">Call Us Now</a>
+     </div>
+
+  </section>
+  <!--about us-->
+      <seaction class="about" id="about">
+
+       <div class="about-img">
+        <img src="s2.avif">
+       </div>
+       
+       <div class="about-text">
+        <h2>living well begins <br> with eating well.</h2>
+        <p>Dine at Grills Where Flavor Meets Freshness!
+
+          Experience a taste sensation with our chef-crafted dishes, <br>made from the finest local ingredients. Whether it's a casual lunch, a romantic dinner, or a special celebration,<br> Grills promises delicious flavors, refreshing drinks, and a warm atmosphere.
+          
+         <br> Visit us today or reserve your table! Contact Information</p>
+          <a href="https://www.youtube.com/watch?v=V5w1OGknhlc" class="btn">Explore Story<i class='bx bxs-right-arrow'></i></a>
+       </div>
+
+      </seaction>
+
+
+
+
+<section class="search-all" id="search-all">
+
+      <h1 class="search">Search for a Dish</h1>
+      <h2 class="search" style="font-size: 18px;">Research before you try</h2>
+      <div class="search-container">
+          <input type="text" id="dish-name" placeholder="Enter dish name">
+          <button onclick="searchDish()">Search</button>
+      </div>
+      <div id="dish-details" class="dish-container"></div>
+
+
+</section>
+
+
+
+
+
+
+  <!--Menu-->
+      <section class="shop" id="shop">
+        <div class="middle-text">
+            <h4>MENU</h4>
+            <h2>Discover Our Grilled Dishes</h2>
+        </div>
+        <div class="shop-content" id="menu-container">
+<!-- Dishes will be added dynamically here -->
+        </div>
+    
+<!-- Button to display favorites list -->
+         <div class="favorites-btn">
+            <button onclick="showFavorites()" style="width: 200px;">Show Favorites ❤️</button>
+        </div>
+    
+<!-- A window to display your favorite dishes -->
+ 
+<div id="favorites-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeFavorites()">&times;</span>
+                <h2 style="color: goldenrod;">Your Favorite Dishes</h2>
+                <div id="favorites-list"></div>
+            </div>
+        </div>
+    </section>
+    
+    
+   <!--chifs-->
+       <section class="review" id="review" style="margin-top: 200px; margin-bottom: 200px;">
+        <div class="middle-text">
+          <h4 style="font-size: 40px;">Our Chefs</h4>
+          <h2>We have the most famous and best chefs</h2>
+        </div>
+
+        <div class="review-contant">
+          <div class="box">
+            <p>He is a Turkish chef of Arab origins. He became famous as an innovative chef, and achieved Arab and foreign fame</p>
+          <div class="in-box">
+            <div class="bx-img">
+              <a href="https://www.instagram.com/cznburak/?hl=ar"><img src="shef1.png"></a>
+            </div>
+            <div class="bxx-text">
+              <h4>CZN Burak</h4>
+              <h5>Turkish chef </h5>
+            </div>
+          </div>
+        </div>
+        
+
+  <!---chef2-->
+        
+          <div class="box">
+            <p>He is a Turkish chef of Arab origins. He became famous as an innovative chef, and achieved Arab and foreign fame</p>
+          <div class="in-box">
+            <div class="bx-img">
+              <a href="https://www.instagram.com/nusr_et/?hl=ar"> <img src="https://www.watanserb.com/wp-content/uploads/2023/01/%D8%A7%D9%84%D8%B4%D9%8A%D9%81-%D8%A7%D9%84%D8%AA%D8%B1%D9%83%D9%8A-%D9%86%D8%B5%D8%B1%D8%AA.jpg.webp"></a>
+            </div>
+            <div class="bxx-text">
+              <h4>Nusret Gökçe</h4>
+              <h5>Turkish chef </h5>
+            </div>
+          </div>
+        </div>
+
+
+ <!--chef3-->
+        <div class="box">
+          <p>A famous British chef known for his strong personality and appearances on cooking shows like Hell's.</p>
+        <div class="in-box">
+          <div class="bx-img">
+           <a href="https://www.instagram.com/gordongram/?hl=ar" ><img src="shef2.jpg"></a>
+          </div>
+          <div class="bxx-text">
+            <h4>Gordon Ramsay</h4>
+            <h5>British chef </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    </section>
+
+
+
+
+
+
+
+<!--Book a Table-->
+
+    <section class="reservation" id="reservation">
+      <div class="middle-text">
+          <h4>Book a Table</h4>
+          <h2>Reserve Your Table Now</h2>
+      </div>
+      <form id="booking-form">
+          <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" placeholder="Enter your name" required>
+          </div>
+          <div class="form-group">
+              <label for="guests">Number of Guests</label>
+              <input type="number" id="guests" min="1" max="20" placeholder="Enter number of guests" required>
+          </div>
+          <div class="form-group">
+              <label for="date">Date</label>
+              <input type="date" id="date" required>
+          </div>
+          <div class="form-group">
+              <label for="time">Time</label>
+              <input type="time" id="time" required>
+          </div>
+          <button type="submit" class="btn3">Reserve Now</button>
+      </form>
+      <p id="confirmation-message"></p>
+  </section>
+  <div class="social">
+    <a href="#" class="crl"><i class='bx bxl-instagram-alt'></i></a>
+    <a href="#"><i class='bx bxl-facebook'></i></a>
+    <a href="#"><i class='bx bxl-twitter'></i></a>
+    <a href="#"><i class='bx bxl-google'></i></a>
+
+  </div>
+
+
+
+
+  <div class="contact-img">
+    <div class="c-one">
+      <img src="f1.png">
+    </div> 
+    <div class="c-one">
+      <img src="f2.png">
+    </div> 
+
+
+
+
+
+
+<!--scroll top-->
+<a href="#" class="scroll">
+  <i class='bx bx-up-arrow-alt'></i>
+</a>
+      
+
+ 
+ <!---link to js--->
+  <script src="script2.js"></script>
+</body>
+</html>
