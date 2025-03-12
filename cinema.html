@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iMovies</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #000;
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        /*header*/
+
+        .movie-card6 {
+            position: fixed;
+            top: 70px;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 40px;
+            background: linear-gradient(to bottom, rgba(149, 149, 149, 0.8) 0%, transparent 100%);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 38px;
+            font-weight: bold;
+            margin-left: -60px;
+        }
+/*navbar*/
+        .movie-card6 nav {
+            display: flex;
+            gap: 50px;
+        }
+
+        .movie-card6 nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 27px;
+          
+        }
+
+        .movie-card6 nav a:hover {
+            color: #ff0000;
+            
+
+        }
+
+          /*home*/
+
+        .main-content {
+            position: relative;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: opacity 0.5s ease;
+        }
+
+        .background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            padding: 60px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .movie-info {
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+            top: 370px;
+            left: -100px;
+        }
+
+        .movie-title {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .movie-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .age-rating {
+            background: #ff4444;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .movie-description {
+            color: #ccc;
+            line-height: 1.6;
+            margin-bottom: 300px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background: #ff4444;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #ff2222;
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .movie-cards-container {
+            position: absolute;
+            right: 40px;
+            top: 85%;
+            transform: translateY(-50%);
+            width: 600px; /* Adjust width as needed */
+            overflow-x: auto;
+            padding: 20px 0;
+        }
+
+        /* Custom scrollbar styling */
+        .movie-cards-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .movie-cards-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .movie-cards-container::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        .movie-cards-container::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        .movie-cards-container{
+             background: rgba(249, 248, 248, 0.1);
+              border-radius: 8px;
+
+        }
+        .movie-cards {
+            display: flex;
+            gap: 20px;
+            padding: 0 20px;
+            /* Remove position absolute since it's now in a container */
+            position: relative;
+            min-width: max-content;
+        }
+
+        .movie-card {
+            width: 230px;
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            flex-shrink: 0; /* Prevent cards from shrinking */
+        }
+         .movie-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .movie-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 168, 232, 0.3);
+        }
+
+       /* Media Queries for Responsive Design */
+@media (max-width: 1024px) {
+    .movie-cards-container {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        width: 100%;
+        margin-top: 200px;
+    }
+
+    .movie-card6 {
+        padding: 20px 20px;
+    }
+
+    .nav-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .logo {
+        margin-left: 0;
+    }
+
+    .movie-card6 nav {
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        display: none;
+    }
+
+    .movie-title {
+        font-size: 36px;
+    }
+
+    .movie-cards-container {
+        width: 100%;
+        margin-top: 150px;
+    }
+
+    .movie-card {
+        width: 180px;
+    }
+
+    .movie-card6 {
+        padding: 20px;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 10px 20px;
+    }
+
+    .btn-primary {
+        font-size: 16px;
+    }
+
+    .movie-info {
+        max-width: 100%;
+        top: 270px;
+        left: 0;
+    }
+
+    .movie-title {
+        font-size: 28px;
+    }
+}
+
+/* Responsive Layout for Movie Cards */
+@media (max-width: 600px) {
+    .movie-cards-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .movie-card {
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+}
+        @media (max-width: 1024px) {
+            .movie-cards-container {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                width: 100%;
+                margin-top: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+            
+            .movie-title {
+                font-size: 36px;
+            }
+        }
+
+
+
+        /*Film screening section*/
+
+        #movies-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 300px;
+
+        }
+
+        .movie-card1 {
+        width: 200px;
+        background-color: #000000;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      
+        }
+
+        .movie-card1 img {
+        width: 100%;
+        border-radius: 10px;
+        }
+
+        
+
+
+
+
+    .comedy-movies-container {
+       display: flex;
+       flex-wrap: wrap;
+       gap: 55px;
+       justify-content: center;
+       margin-top: 300px;
+    }
+    .comedy-movie-card {
+     width: 200px;
+    background-color: #000000;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    }
+        .comedy-movie-card img {
+            width: 220px;
+            border-radius: 10px;
+        }
+        .comedy-movie-card h3 {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+
+
+
+
+
+
+
+
+
+
+        .horror-movie-card {
+         display: flex;
+         flex-wrap: wrap;
+         gap: 45px;
+         justify-content: center;
+         margin-top: 150px;
+        }
+
+
+
+        .horror-movie-card img {
+            width: 200px;
+            border-radius: 10px;
+        }
+        
+        #horror-movie-list {
+            width: 200px;
+            background-color: #000000;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+
+
+
+
+    /*Book a ticket*/
+    .main-content2{
+    background-color: #0d0d0d;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    margin-top: 200px;
+
+     }
+
+
+    /*seat*/
+    .seat {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(145deg, #1e90ff, #007acc);
+            box-shadow: 0 4px 10px rgba(0, 191, 255, 0.5);
+
+            margin: 5px;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+            border-radius: 5px;
+          }
+
+/* When the mouse is hovered over the seat */
+.seat:hover {
+    transform: scale(1.1);
+    background: linear-gradient(145deg, #00bfff, #0080ff);
+}
+
+/* 🎨 Reserved seats */
+.seat.booked {
+    background: linear-gradient(145deg, #555, #333);
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+/* 🚀 Selected seats */
+.seat.selected {
+    background: linear-gradient(145deg, #ff6347, #ff4500);
+    box-shadow: 0 4px 15px rgba(255, 99, 71, 0.8);
+}
+
+
+/* 🏷 row number */
+.row-label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #f1c40f;
+    text-shadow: 0 0 10px rgba(241, 196, 15, 0.8);
+}
+
+/* 🛒 Booking button */
+button {
+    background: linear-gradient(145deg, #ffcc00, #ff9900);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(255, 165, 0, 0.8);
+}
+
+/* Effect when mouse hovers over the button */
+button:hover {
+    background: linear-gradient(145deg, #ffdd44, #ffaa00);
+    transform: scale(1.05);
+}
+
+.main-content2 h1{
+    margin-bottom: 150px; 
+    background-color: red;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    color: white;
+    font-size: 40px;
+}
+        
+ .movie-cards-container2 h1{
+    margin-bottom: 150px; 
+    background-color: red;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    color: white;
+    font-size: 40px;
+ }      
+
+
+
+
+
+
+
+
+.row-container {
+            margin-bottom: 10px;
+        }
+        .row-label-element {
+            font-size: 18px;
+    font-weight: bold;
+    color: #f1c40f;
+    text-shadow: 0 0 10px rgba(241, 196, 15, 0.8);
+        }
+        .seat-element {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(145deg, #1e90ff, #007acc);
+            box-shadow: 0 4px 10px rgba(0, 191, 255, 0.5);
+
+            margin: 5px;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .seat-element.booked {
+            background: linear-gradient(145deg, #555, #333);
+    box-shadow: none;
+    cursor: not-allowed;
+        }
+        .seat-element.selected {
+            background: linear-gradient(145deg, #ff6347, #ff4500);
+    box-shadow: 0 4px 15px rgba(255, 99, 71, 0.8);
+            color: white;
+        }
+        #total-price-text {
+            font-size: 20px;
+        }
+        #book-tickets-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        #book-tickets-button:hover {
+            background-color: #45a049;}
+
+
+
+
+/*offer*/
+
+            #special-offer {
+    background: linear-gradient(145deg, #ffcc00, #ff9900);
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: -150px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#special-offer h2 {
+    color: #d32f2f;
+    font-size: 28px;
+}
+
+.offer-items {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.offer-box {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 200px;
+}
+
+.offer-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+}
+
+.buy-ticket-button {
+    background: #d32f2f;
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.buy-ticket-button:hover {
+    background: #b71c1c;
+}
+
+
+/* Media Queries for Responsiveness */
+
+/* Small Screens (Mobile) */
+@media (max-width: 600px) {
+    .movie-card1, .comedy-movie-card, #horror-movie-list {
+        width: 100%;
+        margin: 10px;
+    }
+    .comedy-movie-card img, .movie-card1 img, .horror-movie-card img {
+        width: 100%;
+    }
+    .seat {
+        width: 30px;
+        height: 30px;
+    }
+    .row-label {
+        font-size: 16px;
+    }
+    .main-content2 h1, .movie-cards-container2 h1 {
+        font-size: 30px;
+        padding: 20px;
+    }
+    .offer-box {
+        width: 150px;
+    }
+}
+
+/* Medium Screens (Tablets) */
+@media (max-width: 768px) {
+    .movie-card1, .comedy-movie-card, #horror-movie-list {
+        width: 45%;
+    }
+    .comedy-movie-card img, .movie-card1 img, .horror-movie-card img {
+        width: 100%;
+    }
+    .seat {
+        width: 35px;
+        height: 35px;
+    }
+    .main-content2 h1, .movie-cards-container2 h1 {
+        font-size: 35px;
+        padding: 22px;
+    }
+}
+
+/* Large Screens (Desktops) */
+@media (min-width: 1200px) {
+    .movie-card1, .comedy-movie-card, #horror-movie-list {
+        width: 200px;
+    }
+    .seat {
+        width: 40px;
+        height: 40px;
+    }
+    .main-content2 h1, .movie-cards-container2 h1 {
+        font-size: 40px;
+        padding: 25px;
+    }
+
+    h2{
+        display: none;
+    }
+}
+
+
+ /* 🔹 Navbar Styling   of home*/
+ .home-header{
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9999; /* Make it higher than the rest of the elements*/
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+        }
+
+
+       .home-header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-left: 10px;
+            color: azure;
+        }
+
+       .home-header nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin-left: -600px;
+        }
+
+       .home-header nav ul li {
+            display: inline-block;
+
+        }
+
+       .home-header nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 22px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: 0.3s ease-in-out;
+            font-weight: 700;
+        }
+
+       .home-header nav ul li a:hover {
+            background: #ff9800;
+            color: black;
+        }
+
+    </style>
+</head>
+<body>
+
+<!--home header-->
+<header class="home-header">
+    <h1 style="position: relative; top: -10px;"><i class='bx bx-cart' style="font-size: 45px; position: relative; top: 10px;"></i> Luxury Shopping Mall</h1> <!--name of mall-->
+    <nav class="nav-links">
+        <ul>
+            <li><a href="index.html"> Home</a></li>
+            <li><a href="clothes.html"> Fashion Store</a></li>
+            <li><a href="index1.html"> Phone Store</a></li>
+            <li><a href="restaurant.html">Restaurant</a></li>
+            <li><a href="#">Cinema</a></li>
+
+        </ul>
+    </nav>
+</header>
+
+
+
+
+<!--movie header-->
+
+
+    <header class="movie-card6">
+        <div class="nav-container">
+            <div class="logo">Cinema</div>
+            <nav>
+                <a href="#">Home</a>
+                <a href="#movie-cards-container2">Action</a>
+                <a href="#comedy-movies-list">Comedy</a>
+                <a href="#horror-movies-list">Horror</a>
+                <a href="#main-content2">Book tickets</a>
+            </nav>
+            
+        </div>
+    </header>
+
+    <!--home-->
+
+    <main class="main-content">
+        <!--home img-->
+        <div class="background">
+            <img src="/placeholder.svg" alt="Movie Background">
+            <div class="overlay"></div>
+        </div>
+        <!--movie-info-->
+        <div class="content">
+            <div class="movie-info">
+                <h1 class="movie-title"></h1>
+                <div class="movie-meta">
+                    <span class="year"></span>
+                    <span class="age-rating"></span>
+                    <span class="duration"></span>
+                    <span class="genre"></span>
+                </div>
+                <p class="movie-description"></p>
+              
+            </div>
+
+            <div class="movie-cards-container">
+                <div class="movie-cards"></div>
+            </div>
+        </div>
+    </main>
+
+
+
+<!--API movie-->
+
+    <section class="movie-cards-container2" id="movie-cards-container2">
+    <h1 style="text-align: center; font-size: 50px;"><i class='bx bxs-movie-play' style=" color: #000; font-size: 60px; position: relative; top: 10px;"></i>  List of most popular movies on the search bar: <i class='bx bxs-movie-play' style="color: rgb(0, 0, 0); font-size: 60px; position: relative; top: 10px;"></i></h1>
+
+    <!--Action -->
+    <h2 style="font-size: 70px; color: #e80000; font-weight: 900; position: relative; left: 730px; top: 200px;"><i class='bx bx-movie' ></i> Action <i class='bx bx-movie' ></i></h2>
+    <div id="movies-list"></div>
+
+    </section>
+    
+    <hr style="margin-top: 200px;">
+
+    <!--Comedy -->
+
+    <h2 style="font-size: 70px; color: #e80000; font-weight: 900; position: relative; left: 730px; top: 200px;"><i class='bx bx-movie' ></i> Comedy <i class='bx bx-movie' ></i></h2>
+
+    <div id="comedy-movies-list" class="comedy-movies-container"></div>
+
+
+    <hr style="margin-top: 200px;">
+    <!--Horror -->
+    <h2 style="font-size: 70px; color: #e80000; font-weight: 900; position: relative; left: 730px; top: 200px;"><i class='bx bx-movie' ></i> Horror <i class='bx bx-movie' ></i></h2>
+
+    <div id="horror-movies-list" class="horror-movie-card"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Reserve seats-->
+
+  <main class="main-content2" id="main-content2">
+    <h1><i class='bx bxs-movie-play' style=" color: #000; font-size: 60px; position: relative; top: 10px;"></i> The best films that we will show in the cinema, do not delay in reserving your seat <i class='bx bxs-movie-play' style="color: rgb(0, 0, 0); font-size: 60px; position: relative; top: 10px;"></i></h1>
+   <!--Offers-->
+    <section id="special-offer">
+        <h2>🔥 Special Offer! Buy a Ticket & Win Rewards 🎟️🎁</h2>
+        <p style="font-size: 20px;">Book your ticket now and get a <strong>FREE meal 🍔 from  <span style="color:#000;">Grill</span> Restaurant</strong> and a <strong>GIFT 🎁 from <span style="color:#000;">Evara</span> Store</strong>!</p>
+        
+        <div class="offer-items">
+            <div class="offer-box">
+                <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" alt="Meal" class="offer-icon">
+                <p style="color: #000;"><strong>🍔 Free Meal</strong><br> Enjoy a delicious meal from Grill Restaurant.</p>
+            </div>
+            <div class="offer-box">
+                <img src="https://image.similarpng.com/file/similarpng/original-picture/2020/09/White-gift-box-with-red-bow-premium-vector-PNG.png" alt="Gift" class="offer-icon">
+                <p style="color: #000;"><strong>🎁 Fashion Gift</strong><br> Get a surprise gift from Evara Store.</p>
+            </div>
+        </div>
+        <p style="font-size: 20px; font-weight: 800;">Just show them the ticket</p>
+    </section>
+<!-- 🎬 Movie Details Section -->
+     <section id="movie-details">
+        <h2 style="font-size: 40px;" >Movie Title:  Mortal Kombat 2</h2>
+        <p style="color: red; font-size: 20px;"><strong>Show Date:</strong> <span id="show-date">October 24, 2025</span></p> <!-- 📅 تاريخ العرض -->
+        <p style="color: red; font-size: 20px;"><strong>Time:</strong> <span id="show-date">10:00 AM </span></p> <!-- 📅 تاريخ العرض -->
+
+        <img src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/6Wdl9N6dL0Hi0T1qJLWSz6gMLbd.jpg" 
+        alt="Movie Poster" class="movie-poster" style="width: 350px;">
+        <p style="font-size: large;"><strong>Description:</strong> <span id="movie-description">
+            Mortal Kombat 2 is an upcoming American martial arts fantasy film directed<br> by Simon McQuoid and written by Jeremy Slater        </span></p> <!-- 📝 وصف الفيلم -->
+      
+    </section>
+
+<!-- 🎟️ Seat Selection Section -->
+     <section id="seating">
+        <h3>Select Seats:</h3>
+        <div id="seats-container">
+            <!-- Seats will be displayed here -->
+        </div>
+    </section>
+
+<!-- 🛒 Ticket Reservation Section -->
+     <section id="booking" style="margin-top: 30px;">
+        <p id="total-price" style="color: red; font-size: 20px;">Total Price: $0</p>
+
+        <h3>Book Tickets:</h3>
+        <button id="book-tickets">Book Tickets</button>
+
+    </section>
+
+
+<!--movie-2-->
+
+
+<hr style="margin-top: 100px;">
+    <section id="movie-info" style="margin-top: 200px;">
+        <h2 style="font-size: 40px;">Den of Thieves 2: Pantera</h2>
+        <p style="color: red; font-size: 20px;"><strong>Show Date:</strong> <span id="show-date-text">May 2, 2025</span></p>
+        <p style="color: red; font-size: 20px;"><strong>Time:</strong> <span id="show-time-text">9:00 AM</span></p>
+    
+        <img src="https://m.media-amazon.com/images/M/MV5BZGIyYTI5N2QtZmQ5ZC00NDE4LThhYWMtNGE5NjI1OGU2M2NjXkEyXkFqcGc@._V1_.jpg" 
+        alt="Movie Poster" class="movie-poster-image" style="width: 350px;">
+    
+        <p style="font-size: large;"><strong>Description:</strong> <span id="movie-description-text">
+            A sequel to the popular crime thriller, the film follows Big Nick's adventures in Europe,<br> where he becomes involved in the world of diamond theft and the Panthera mafia.
+        </span></p>
+    </section>
+    
+    <!-- 🎟️ Section to Select Seats -->
+    <section id="seat-selection">
+        <h3>Select Seats:</h3>
+        <div id="seat-container-element">
+            <!-- Seats will be displayed here -->
+        </div>
+    </section>
+    
+    <!-- 🛒 Ticket Booking Section -->
+    <section id="ticket-booking-section" style="margin-top: 30px;">
+        <p id="total-price-text" style="color: red; font-size: 20px;">Total Price: $0</p>
+    
+        <h3>Book Tickets:</h3>
+        <button id="book-tickets-button">Book Tickets</button>
+    </section>
+   
+</main>
+    
+
+    <script>
+        const movies = [
+        {
+        "id": 1,
+        "title": "The Lord of the Rings: The Return of the King",
+        "background": "https://m.media-amazon.com/images/S/pv-target-images/2c70c38075924358afbbf210cab6ddf9ebed7a9d47c87713c8759d5758b7dadb.jpg",
+        "thumbnail": "https://m.media-amazon.com/images/I/A16Y9ujrw3L._AC_UF1000,1000_QL80_.jpg",
+        "year": "2003",
+        "ageRating": "PG-13",
+        "duration": "3h 21min",
+        "genre": "Adventure, Drama, Fantasy",
+        "description": "The epic conclusion to the story of the One Ring as Frodo and Sam approach Mount Doom, with the fate of Middle-earth at stake."
+    },
+        {
+        "id": 2,
+        "title": "Spider-Man: No Way Home",
+        "background": "https://images.alphacoders.com/125/1250041.jpg",
+        "thumbnail": "https://mir-s3-cdn-cf.behance.net/project_modules/hd/389494131559049.62dd8ef746cd3.jpg",
+        "year": "2021",
+        "ageRating": "PG-13",
+        "duration": "2h 28min",
+        "genre": "Action, Adventure, Sci-Fi",
+        "description": "Peter Parker seeks help from Doctor Strange to erase the memory of his secret identity from the world, leading to dangerous consequences."
+    },
+   
+    {
+    "id": 3,
+    "title": "Top Gun: Maverick",
+    "background": "https://media.licdn.com/dms/image/v2/D5612AQG98IdkyV-GGA/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1655225008484?e=2147483647&v=beta&t=NL1ah2OG9BMEv7y40uvVi8seyrZXC7Y-mBqZHMWt66w",
+    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/thumb/1/13/Top_Gun_Maverick_Poster.jpg/220px-Top_Gun_Maverick_Poster.jpg",
+    "year": "2022",
+    "ageRating": "PG-13",
+    "duration": "2h 11min",
+    "genre": "Action, Drama",
+    "description": "After more than thirty years of service as one of the Navy's top aviators, Pete 'Maverick' Mitchell is where he belongs, pushing the envelope as a courageous test pilot and dodging the advancement in rank that would ground him."
+},
+{
+        "id": 4,
+        "title": "Forrest Gump",
+        "background": "https://images.squarespace-cdn.com/content/v1/62ceea4ed58a7120a198c234/38fd3a06-e1a2-46f2-a083-9540906211d3/ForrestGump3.png",
+        "thumbnail": "https://m.media-amazon.com/images/M/MV5BNDYwNzVjMTItZmU5YS00YjQ5LTljYjgtMjY2NDVmYWMyNWFmXkEyXkFqcGc@._V1_.jpg",
+        "year": "1994",
+        "ageRating": "PG-13",
+        "duration": "2h 22min",
+        "genre": "Drama, Romance",
+        "description": "The life story of Forrest Gump, a man with low intelligence who unwittingly influences several historical events in the 20th century."
+    },
+  
+        {
+        "id": 5,
+        "title": "Inception",
+        "background": "https://wallpapers.com/images/hd/inception-movie-poster-dream-is-real-9ei1rpyath620n92.jpg",
+        "thumbnail": "https://m.media-amazon.com/images/M/MV5BMjExMjkwNTQ0Nl5BMl5BanBnXkFtZTcwNTY0OTk1Mw@@._V1_.jpg",
+        "year": "2010",
+        "ageRating": "PG-13",
+        "duration": "2h 28min",
+        "genre": "Action, Adventure, Sci-Fi",
+        "description": "A skilled thief who specializes in entering the dreams of others is tasked with planting an idea in a target's subconscious."
+    },
+    {
+        "id": 6,
+        "title": "The Godfather",
+        "background": "https://ntvb.tmsimg.com/assets/p6326_v_h8_be.jpg?w=960&h=540",
+        "thumbnail": "https://miro.medium.com/v2/resize:fit:1170/1*Gp-AhI3fuWvRRWz3YBpkaA.jpeg",
+        "year": "1972",
+        "ageRating": "R",
+        "duration": "2h 55min",
+        "genre": "Crime, Drama",
+        "description": "The story of a powerful Italian-American crime family and their internal struggles as they navigate the criminal underworld."
+    },
+    {
+        "id": 7,
+        "title": "The Dark Knight",
+        "background": "https://static1.colliderimages.com/wordpress/wp-content/uploads/2024/03/the-dark-knight-2008-poster.jpg",
+        "thumbnail": "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_FMjpg_UX1000_.jpg",
+        "year": "2008",
+        "ageRating": "PG-13",
+        "duration": "2h 32min",
+        "genre": "Action, Crime, Drama",
+        "description": "Batman faces off against the Joker, a criminal mastermind who seeks to create chaos in Gotham City."
+    },
+    
+    {
+        "id": 8,
+        "title": "Dune",
+        "background": "https://www.thelance.org/wp-content/uploads/2021/12/Villeneuve-Dune-courtesy-of-TV-Insider-752x440-1.jpg",
+        "thumbnail": "https://lozierinstitute.org/wp-content/uploads/2023/09/dune.webp",
+        "year": "2021",
+        "ageRating": "PG-13",
+        "duration": "2h 35min",
+        "genre": "Adventure, Drama, Sci-Fi",
+        "description": "A young nobleman becomes embroiled in a war for control of the galaxys most valuable resource, the spice melange."
+    },
+   
+   
+]
+
+
+ // Function to update the displayed movie details
+function updateMovie(movie) {
+    // Select the background element and apply a fade effect
+    const background = document.querySelector('.background');
+    background.style.opacity = '0'; // Start fade-out effect
+    
+    setTimeout(() => {
+        // Update movie details after the fade-out effect
+        document.querySelector('.background img').src = movie.background;
+        document.querySelector('.movie-title').textContent = movie.title;
+        document.querySelector('.year').textContent = movie.year;
+        document.querySelector('.age-rating').textContent = movie.ageRating;
+        document.querySelector('.duration').textContent = movie.duration;
+        document.querySelector('.genre').textContent = movie.genre;
+        document.querySelector('.movie-description').textContent = movie.description;
+        
+        background.style.opacity = '1'; // Apply fade-in effect
+    }, 300); // Delay to allow fade effect
+}
+
+// Function to create movie cards dynamically and add event listeners
+function createMovieCards() {
+    const container = document.querySelector('.movie-cards');
+    container.innerHTML = ''; // Clear previous movie cards
+    
+    movies.forEach(movie => {
+        const card = document.createElement('div'); // Create a new div element for each movie
+        card.className = 'movie-card'; // Assign class for styling
+        card.innerHTML = `<img src="${movie.thumbnail}" alt="${movie.title}">`; // Add movie thumbnail
+        
+        // Add click event to update the movie details when a card is clicked
+        card.addEventListener('click', () => {
+            updateMovie(movie);
+        });
+        
+        container.appendChild(card); // Append the movie card to the container
+    });
+}
+
+// Initialize the page with the first movie when DOM is fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+    updateMovie(movies[0]); // Display the first movie by default
+    createMovieCards(); // Generate movie cards dynamically
+});
+
+
+
+
+
+
+
+// API key for accessing the OMDB API
+const apiKey = "f77c6205";
+
+// API URL to fetch action movies
+const apiUrl = `https://www.omdbapi.com/?apikey=${apiKey}&s=action`;
+
+// Function to fetch movies from the API
+async function getMovies() {
+    try {
+        // Fetch data from the API
+        const response = await fetch(apiUrl);
+        
+        // Convert response to JSON format
+        const data = await response.json();
+        
+        // Check if the response is successful
+        if (data.Response === "True") {
+            // If successful, display the movies
+            displayMovies(data.Search);
+        } else {
+            // If no movies are found, log an error
+            console.error("No movies found");
+        }
+    } catch (error) {
+        // Log an error if something goes wrong with the fetch request
+        console.error("An error occurred while fetching data:", error);
+    }
+}
+
+// Function to display movies on the webpage
+function displayMovies(movies) {
+    // Select the container where movies will be displayed
+    const moviesContainer = document.getElementById("movies-list");
+    
+    // Clear the container before adding new movies
+    moviesContainer.innerHTML = "";
+
+    // Loop through each movie in the list
+    movies.forEach(movie => {
+        // Create a new div element for the movie card
+        const movieElement = document.createElement("div");
+        movieElement.classList.add("movie-card");
+
+        // Set the inner HTML to display the movie poster and link to details page
+        movieElement.innerHTML = `
+            <a href="movie.html?id=${movie.imdbID}">
+                <img src="${movie.Poster}" alt="${movie.Title}">
+            </a>
+        `;
+
+        // Append the movie card to the container
+        moviesContainer.appendChild(movieElement);
+    });
+}
+
+// Call the function to fetch and display movies when the page loads
+getMovies();
+
+
+
+
+
+
+// API key for accessing the OMDB API
+const comedyApiKey = "f77c6205";
+
+// API URL to fetch comedy movies
+const comedyApiUrl = `https://www.omdbapi.com/?apikey=${comedyApiKey}&s=comedy`;
+
+// Function to fetch comedy movies from the API
+async function fetchComedyMovies() {
+    try {
+        // Fetch data from the API
+        const comedyResponse = await fetch(comedyApiUrl);
+        
+        // Convert response to JSON format
+        const comedyData = await comedyResponse.json();
+        
+        // Check if the response contains movies
+        if (comedyData.Response === "True") {
+            // If movies are found, render them on the page
+            renderComedyMovies(comedyData.Search);
+        } else {
+            console.error("No comedy movies found");
+        }
+    } catch (error) {
+        console.error("An error occurred while fetching comedy movie data:", error);
+    }
+}
+
+// Function to display comedy movies on the webpage
+function renderComedyMovies(comedyMovies) {
+    // Select the container where comedy movies will be displayed
+    const comedyMoviesContainer = document.getElementById("comedy-movies-list");
+    
+    // Clear the container before adding new movies
+    comedyMoviesContainer.innerHTML = "";
+
+    // Loop through each comedy movie
+    comedyMovies.forEach(comedyMovie => {
+        // Create a new div element for the comedy movie card
+        const comedyMovieElement = document.createElement("div");
+        comedyMovieElement.classList.add("comedy-movie-card");
+
+        // Set the inner HTML to display the comedy movie poster and link to details page
+        comedyMovieElement.innerHTML = `
+            <a href="movie.html?id=${comedyMovie.imdbID}">
+                <img src="${comedyMovie.Poster}" alt="${comedyMovie.Title}">
+            </a>
+        `;
+
+        // Append the comedy movie card to the container
+        comedyMoviesContainer.appendChild(comedyMovieElement);
+    });
+}
+
+// Call the function to fetch and display comedy movies
+fetchComedyMovies();
+
+
+// API key for accessing the OMDB API (same key used for horror movies)
+const horrorApiKey = "f77c6205";
+
+// API URL to fetch horror movies
+const horrorApiUrl = `https://www.omdbapi.com/?apikey=${horrorApiKey}&s=horror`;
+
+// Function to fetch horror movies from the API
+async function fetchHorrorMovies() {
+    try {
+        // Fetch data from the API
+        const horrorResponse = await fetch(horrorApiUrl);
+        
+        // Convert response to JSON format
+        const horrorData = await horrorResponse.json();
+        
+        // Check if the response contains movies
+        if (horrorData.Response === "True") {
+            // If movies are found, render them on the page
+            renderHorrorMovies(horrorData.Search);
+        } else {
+            console.error("No horror movies found");
+        }
+    } catch (error) {
+        console.error("An error occurred while fetching horror movie data:", error);
+    }
+}
+
+// Function to display horror movies on the webpage
+function renderHorrorMovies(horrorMovies) {
+    // Select the container where horror movies will be displayed
+    const horrorMoviesContainer = document.getElementById("horror-movies-list"); 
+    
+    // Clear the container before adding new movies
+    horrorMoviesContainer.innerHTML = "";
+
+    // Loop through each horror movie
+    horrorMovies.forEach(horrorMovie => { 
+        // Create a new div element for the horror movie card
+        const horrorMovieElement = document.createElement("div");
+        horrorMovieElement.classList.add("horror-movie-card"); 
+
+        // Set the inner HTML to display the horror movie poster and link to details page
+        horrorMovieElement.innerHTML = `
+            <a href="movie.html?id=${horrorMovie.imdbID}">
+                <img src="${horrorMovie.Poster}" alt="${horrorMovie.Title}">
+            </a>
+        `;
+
+        // Append the horror movie card to the container
+        horrorMoviesContainer.appendChild(horrorMovieElement);
+    });
+}
+
+// Call the function to fetch and display horror movies
+fetchHorrorMovies();
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const totalSeatsCount = 20; // Total number of seats available
+    const rowsCount = 4; // Number of rows in the seating layout
+    const seatsPerRowCount = Math.floor(totalSeatsCount / rowsCount); // Number of seats per row
+
+    const rowTicketPrices = { 1: 30, 2: 20, 3: 15, 4: 8 }; // Prices for each row
+
+    let reservedSeats = JSON.parse(localStorage.getItem("reservedSeats")) || [1, 5, 10, 15]; // Seats already reserved, fetched from localStorage
+    let selectedSeatsList = []; // List of selected seats for booking
+    let totalAmount = 0; // Total amount for the selected seats
+
+    const seatsContainerElement = document.querySelector("#seat-container-element"); // Container element for seats
+    const totalPriceText = document.querySelector("#total-price-text"); // Element displaying the total price
+    const bookTicketsButton = document.querySelector("#book-tickets-button"); // Button to book the selected seats
+
+    // If the seats container element is missing in HTML, log an error and stop execution
+    if (!seatsContainerElement) {
+        console.error("❌ Seats element does not exist in HTML, make sure there is a valid ID.");
+        return;
+    }
+
+    // Function to render the seating layout
+    const renderSeatsLayout = () => {
+        seatsContainerElement.innerHTML = ""; // Clear any existing layout
+
+        // Loop through each row and create the seat elements
+        for (let rowIndex = 1; rowIndex <= rowsCount; rowIndex++) {
+            const rowContainerElement = document.createElement("div");
+            rowContainerElement.classList.add("row-container");
+
+            // Create a label for the row
+            const rowLabelElement = document.createElement("p");
+            rowLabelElement.classList.add("row-label-element");
+            rowLabelElement.textContent = `Row ${rowIndex} - $${rowTicketPrices[rowIndex]} per seat`;
+            rowContainerElement.appendChild(rowLabelElement);
+
+            // Create the seats for the row
+            for (let seatIndex = 1; seatIndex <= seatsPerRowCount; seatIndex++) {
+                const seatNumber = (rowIndex - 1) * seatsPerRowCount + seatIndex;
+                const seatElement = document.createElement("div");
+                seatElement.classList.add("seat-element");
+                seatElement.textContent = seatNumber;
+
+                // Mark seats as booked if they are in the reservedSeats list
+                if (reservedSeats.includes(seatNumber)) {
+                    seatElement.classList.add("booked");
+                }
+
+                rowContainerElement.appendChild(seatElement);
+            }
+
+            seatsContainerElement.appendChild(rowContainerElement); // Append the row container to the seats container
+        }
+    };
+
+    // Function to handle seat selection
+    const selectSeat = (seatElement, seatNumber, rowNumber) => {
+        // If the seat is already booked, show an alert
+        if (seatElement.classList.contains("booked")) return alert("This seat is already booked.");
+
+        // Toggle the seat selection and update the selectedSeatsList accordingly
+        if (seatElement.classList.toggle("selected")) {
+            selectedSeatsList.push({ seatNumber, price: rowTicketPrices[rowNumber] });
+        } else {
+            selectedSeatsList = selectedSeatsList.filter(seat => seat.seatNumber !== seatNumber);
+        }
+
+        // Update the total amount after seat selection
+        updateTotalAmount();
+    };
+
+    // Function to update the total price based on selected seats
+    const updateTotalAmount = () => {
+        totalAmount = selectedSeatsList.reduce((sum, seat) => sum + seat.price, 0); // Calculate the sum of prices
+        totalPriceText.textContent = `Total Price: $${totalAmount}`; // Update the total price text
+    };
+
+    // Event listener for seat selection
+    seatsContainerElement.addEventListener("click", (event) => {
+        const seatElement = event.target;
+
+        // If the clicked element is not a seat or is already booked, return early
+        if (!seatElement.classList.contains("seat-element") || seatElement.classList.contains("booked")) return;
+
+        const seatNumber = parseInt(seatElement.textContent); // Get the seat number from the element's text content
+        const rowNumber = Math.ceil(seatNumber / seatsPerRowCount); // Calculate the row number
+
+        selectSeat(seatElement, seatNumber, rowNumber); // Call the selectSeat function
+    });
+
+    // Event listener for the book tickets button
+    bookTicketsButton.addEventListener("click", () => {
+        // If no seats are selected, alert the user to select at least one seat
+        if (selectedSeatsList.length === 0) return alert("Please select at least one seat.");
+
+        // Get the seat numbers of the selected seats
+        const seatNumbers = selectedSeatsList.map(seat => seat.seatNumber);
+
+        // Show an alert confirming the booking
+        alert(`Seats booked successfully: ${seatNumbers.join(", ")}\nTotal Price: $${totalAmount}`);
+
+        // Add the selected seats to the reservedSeats list and store them in localStorage
+        reservedSeats = [...reservedSeats, ...seatNumbers];
+        localStorage.setItem("reservedSeats", JSON.stringify(reservedSeats));
+
+        selectedSeatsList = []; // Clear the selected seats list
+        renderSeatsLayout(); // Re-render the seating layout
+        updateTotalAmount(); // Update the total price
+    });
+
+    renderSeatsLayout(); // Initial rendering of the seating layout
+});
+
+
+
+
+</script>
+
+    <script>
+
+// Seat configuration
+const totalSeats = 20; // Total number of seats available
+const rows = 4; // Number of rows in the seating layout
+const seatsPerRow = totalSeats / rows; // Calculate the number of seats per row
+
+// Ticket prices per row
+const ticketPrices = {
+    1: 20,  // Row 1: $20
+    2: 15,  // Row 2: $15
+    3: 10,  // Row 3: $10
+    4: 8    // Row 4: $8
+};
+
+// Retrieve the booked seats from localStorage, or set default values if none exist
+let bookedSeats = JSON.parse(localStorage.getItem("bookedSeats")) || [1,5,10, 15];
+let selectedSeats = []; // Array to hold the selected seats
+let totalPrice = 0; // Variable to track the total price of selected seats
+
+// Function to render the seating layout
+function renderSeats() {
+    const seatsContainer = document.getElementById("seats-container"); // Get the container where seats will be displayed
+    seatsContainer.innerHTML = ""; // Clear any existing seat layout
+
+    // Loop through each row and create the seat elements
+    for (let row = 1; row <= rows; row++) {
+        const rowContainer = document.createElement("div");
+        rowContainer.classList.add("row"); // Add class for styling
+
+        // Create and add row label (e.g., Row 1 - $20 per seat)
+        const rowLabel = document.createElement("p");
+        rowLabel.classList.add("row-label");
+        rowLabel.textContent = `Row ${row} - $${ticketPrices[row]} per seat`;
+        rowContainer.appendChild(rowLabel);
+
+        // Loop through the seats in the current row
+        for (let i = 1; i <= seatsPerRow; i++) {
+            const seatNumber = (row - 1) * seatsPerRow + i; // Calculate the seat number
+            const seat = document.createElement("div");
+            seat.classList.add("seat"); // Add class for styling
+            seat.textContent = seatNumber; // Display the seat number
+
+            // If the seat is already booked, mark it as "booked"
+            if (bookedSeats.includes(seatNumber)) {
+                seat.classList.add("booked");
+            }
+            seat.addEventListener("click", () => selectSeat(seat, seatNumber, row)); // Add click event to select the seat
+            rowContainer.appendChild(seat); // Append the seat to the row container
+        }
+        seatsContainer.appendChild(rowContainer); // Append the row container to the main seats container
+    }
+}
+
+// Function to handle seat selection
+function selectSeat(seat, seatNumber, row) {
+    // If the seat is already booked, alert the user
+    if (seat.classList.contains("booked")) {
+        alert("This seat is already booked.");
+        return;
+    }
+
+    // Toggle the seat selection
+    if (seat.classList.contains("selected")) {
+        seat.classList.remove("selected"); // Remove the "selected" class
+        selectedSeats = selectedSeats.filter(s => s.seatNumber !== seatNumber); // Remove the seat from selectedSeats array
+    } else {
+        seat.classList.add("selected"); // Add the "selected" class
+        selectedSeats.push({ seatNumber, price: ticketPrices[row] }); // Add the seat to selectedSeats array
+    }
+
+    // Update the total price whenever a seat is selected/deselected
+    updateTotalPrice();
+}
+
+// Function to update the total price of selected seats
+function updateTotalPrice() {
+    // Calculate the total price by summing up the prices of all selected seats
+    totalPrice = selectedSeats.reduce((sum, seat) => sum + seat.price, 0);
+    // Update the total price text in the UI
+    document.getElementById("total-price").textContent = `Total Price: $${totalPrice}`;
+}
+
+// Event listener for the "Book Tickets" button
+document.getElementById("book-tickets").addEventListener("click", () => {
+    // If no seats are selected, alert the user to select at least one seat
+    if (selectedSeats.length > 0) {
+        // Get the seat numbers of the selected seats
+        const seatNumbers = selectedSeats.map(seat => seat.seatNumber);
+        // Alert the user with a confirmation message
+        alert(`Seats booked successfully: ${seatNumbers.join(", ")}\nTotal Price: $${totalPrice}`);
+        
+        // Add the newly booked seats to the list of booked seats and save it to localStorage
+        bookedSeats = [...bookedSeats, ...seatNumbers];
+        localStorage.setItem("bookedSeats", JSON.stringify(bookedSeats));
+
+        // Clear the selected seats and re-render the seating layout
+        selectedSeats = [];
+        renderSeats();
+        updateTotalPrice();
+    } else {
+        alert("Please select at least one seat.");
+    }
+});
+
+// Initial call to render the seats when the page loads
+renderSeats();
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+    
+</body>
+</html>

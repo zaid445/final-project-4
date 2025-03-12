@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Charset and viewport settings for proper rendering on different devices -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Store</title>
+  
+  <!-- Link to Bootstrap for styling -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+  <!-- Custom stylesheets for the market and general styling -->
+  <link rel="stylesheet" href="stylemarket.css">
+  <link rel="stylesheet" href="cart.css">
+
+  <!-- Font Awesome for icons -->
+  <script src="https://kit.fontawesome.com/92d70a2fd8.js" crossorigin="anonymous"></script>
+  
+ <!-- Links Boxicons for using icons in the project -->
+ <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>  
+</head>
+<body>
+
+
+  <!-- Header with Store title and cart icon -->
+  <div class="header">
+    <p class="logo">Store</p>
+    <a href="clothes.html" class="back"><i class='bx bxs-chevron-left-square'></i>Back to Home</a>
+    <div class="cart">
+      <!-- Cart icon with item count -->
+      <i class='bx bx-cart' style="font-size: 40px;"></i>
+      <p id="count">0</p> <!-- Displays number of items in the cart -->
+    </div>
+  </div>
+
+  <!-- Main container for content -->
+  <div class="container">
+    <!-- React app or content area -->
+    <div id="root"></div>
+    
+    <!-- Sidebar for cart details -->
+    <div class="sidebar">
+      <div class="head">
+        <p>My Cart</p> <!-- Cart heading -->
+      </div>
+      
+      <!-- Cart items (initially empty) -->
+      <div id="cartItem">Your cart is empty</div>
+      
+      <div class="foot">
+        <h3>Total</h3>
+        <!-- Displaying total amount in cart -->
+        <h2 id="total">$ 0.00</h2>
+      </div>
+      <!-- Button to confirm purchase (currently not active) -->
+      <button id="cart-controls"></button> 
+    </div>
+  </div>
+
+  <!-- Linking to external JavaScript file for cart and store functionality -->
+  <script src="cart.js"></script>
+
+</body>
+</html>

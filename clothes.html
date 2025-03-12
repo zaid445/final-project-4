@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="ar">
+    <head>
+        <!-- Specifies the character encoding for the document -->
+        <meta charset="UTF-8">
+        
+        <!-- Sets the viewport to make the website responsive on mobile devices -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- Defines the title of the webpage -->
+        <title>Evara Store</title>
+        
+        <!-- Links the external CSS file for styling -->
+        <link rel="stylesheet" href="style.css">
+
+        <!-- Includes Bootstrap CSS for responsive design and styling -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        
+        <!-- Links Boxicons for using icons in the project -->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+        <!-- إضافة CSS لـ Swiper -->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+<!-- إضافة JavaScript لـ Swiper -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<style>
+    /* 🔹 Navbar Styling   of home*/
+    .home-header{
+          background: rgba(0, 0, 0, 0.9);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px 50px;
+          position: fixed;
+          width: 100%;
+          top: 0;
+          left: 0;
+          z-index: 9999; /* Make it higher than the rest of the elements*/
+          box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+      }
+
+
+     .home-header h1 {
+          font-size: 24px;
+          font-weight: bold;
+          margin-left: 10px;
+          color: azure;
+      }
+
+     .home-header nav ul {
+          list-style: none;
+          display: flex;
+          gap: 25px;
+          margin-left: -600px;
+      }
+
+     .home-header nav ul li {
+          display: inline-block;
+
+      }
+
+     .home-header nav ul li a {
+          text-decoration: none;
+          color: white;
+          font-size: 22px;
+          padding: 10px 15px;
+          border-radius: 5px;
+          transition: 0.3s ease-in-out;
+          font-weight: 700;
+      }
+
+     .home-header nav ul li a:hover {
+          background: #ff9800;
+          color: black;
+      }
+
+     
+
+</style>
+    </head>
+    
+<body>
+    <!-- Main container with a fluid layout -->
+
+
+
+
+
+    <!--home header-->
+    <header class="home-header">
+        <h1 style="position: relative; top: -10px;"><i class='bx bx-cart' style="font-size: 45px; position: relative; top: 10px;"></i> Luxury Shopping Mall</h1> <!--name of mall-->
+        <nav class="nav-links">
+            <ul>
+                <li><a href="index.html"> Home</a></li>
+                <li><a href="#"> Fashion Store</a></li>
+                <li><a href="index1.html"> Phone Store</a></li>
+                <li><a href="restaurant.html">Restaurant</a></li>
+                <li><a href="cinema.html">Cinema</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+
+    <div class="container-fluid">
+        <!-- Header section containing logo, navigation menu, and login button -->
+
+    <header class="evara-header">
+        <div class="logo">EVARA</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#popular-categories">Categories</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#vehicles">vehicles</a></li>
+                <li><a href="#hot-releases">Offers </a></li>
+                <li><a href="cart.html">Store</a></li>
+            </ul>
+            <button class="login-button" id="loginButton" onclick="toggleLoginLogout()" style="background-color: #007b5e; color: #000000; padding: 10px; font-size: 20px;">
+                LOGIN
+            </button>
+
+        </nav>
+            <!-- Navigation bar with favorites section -->
+
+        <nav class="navbar navbar-light bg-light"  style="margin-left: -1280px; margin-top: 150px;">
+            <div class="container-fluid" style="width: 1900px;  ">
+                <a class="navbar-brand" href="#"><i class='bx bxs-calendar-heart' style="font-size: 25px; color: #007b5e; position: relative; top: 2px;"></i> Favorites</a>
+                <div class="fav-icon-container d-flex align-items-center">
+                    <i class='bx bxs-book-heart' id="fav-icon" style="font-size: 30px; margin-right: 15px;"></i>
+                    <div class="favorite-list" id="favorite-list" style="font-size: 8px;"></div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+  
+<!--The process of entering the email and password-->
+<div class="popup" id="loginPopup">
+    <div class="popup-content">
+        <button class="close-popup" onclick="closePopup()" style="margin-top: 50px; width: 100px;  background: none;"><i class='bx bx-x' style="font-size: 50px; font-weight: 800;"></i></button>
+        <h2>USER LOGIN</h2>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button onclick="validateLogin()">Login</button>
+    </div>
+</div>
+
+      
+
+            <!-- Hero section with promotional content -->
+
+    <section class="hero">
+        <div class="hero-text">
+            <p>Hot promotions</p>
+            <h1>Fashion Trending <br><span>Great Collection</span></h1>
+            <p>Save more with coupons & up to 20% off</p>
+            <a href="#popular-categories" class="shop">Shop Now</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://almaal.org/wp-content/uploads/2021/02/%D8%AF%D9%8A%D9%83%D9%88%D8%B1%D8%A7%D8%AA-%D9%85%D8%AD%D9%84%D8%A7%D8%AA-%D9%85%D9%84%D8%A7%D8%A8%D8%B3-%D9%86%D8%B3%D8%A7%D8%A6%D9%8A%D8%A91.jpg" alt="Fashion Hat">
+        </div>
+    </section>
+
+    <!-- Main container for the page -->
+
+    <div class="container">
+            <!-- Popular Categories Section -->
+
+        <section class="popular-categories" id="popular-categories">
+            <h1>Popular Categories</h1>
+            <div class="carousel-container">
+                            <!-- Button to navigate left in the carousel -->
+
+                <button class="prev" onclick="prevImages()"><i class='bx bx-left-arrow-alt'></i></button>
+                <div class="carousel" id="carousel">
+                                    <!-- Images will be dynamically inserted here -->
+
+                </div>
+                            <!-- Button to navigate right in the carousel -->
+
+                <button class="next" onclick="nextImages()"><i class='bx bx-right-arrow-alt'></i></button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Filter Section -->
+
+    <section class="filter-section">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="tshirt">T-Shirts</button>
+        <button class="filter-btn" data-filter="bags">Bags</button>
+        <button class="filter-btn" data-filter="shoes">Shoes</button>
+        <button class="filter-btn" data-filter="Cap">Cap</button>
+
+    </section>
+    
+
+    <!-- Products List -->
+
+    <div class="products row">
+            <!-- Product 1: T-Shirt -->
+
+        <div class="product col-12 col-sm-6 col-md-4 col-lg-3" data-category="tshirt">
+            <div class="product-card">
+                <a href="#modal1">  <img src="pngegg (11).png" alt="T-Shirt" class="img-fluid product-img" ></a>
+                            <!-- Favorite (heart) icon -->
+
+                <i class='bx bx-heart favorite-icon'></i>
+                <div class="product-info">
+                    <h3 class="product-name">T-Shirt 1</h3>
+                    <div class="product-rating">★★★★☆</div>
+                    <p class="product-price">$19.99</p>
+                    <a href="cart.html" class="add-to-cart btn btn-success">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        
+        <div class="product col-12 col-sm-6 col-md-4 col-lg-3" data-category="tshirt">
+            <div class="product-card">
+                <a href="#modal2"> <img src="pngegg (12).png" alt="T-Shirt" class="img-fluid product-img"></a>
+                <i class='bx bx-heart favorite-icon'></i>
+                <div class="product-info">
+                    <h3 class="product-name">T-Shirt 2</h3>
+                    <div class="product-rating">★★★☆☆</div>
+                    <p class="product-price">$29.99</p>
+                    <a href="cart.html" class="add-to-cart btn btn-success">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="product col-12 col-sm-6 col-md-4 col-lg-3" data-category="tshirt">
+            <div class="product-card">
+
+                <a href="#modal3">  <img src="pngegg (13).png" alt="T-Shirt" class="img-fluid product-img"></a>
+            <i class='bx bx-heart favorite-icon'></i>
+
+            <div class="product-info">
+                <h3 class="product-name">T-Shirt 3</h3>
+                <div class="product-rating">
+                    <span>★★★☆☆</span>
+                </div>
+                <p class="product-price">$32.50</p>
+                <a href="cart.html" class="add-to-cart btn btn-success">Add to Cart</a>
+            </div>
+        </div>
+        </div>
+
+
+            <!-- Product 2: Bag -->
+
+        <div class="product col-12 col-sm-6 col-md-4 col-lg-3" data-category="bags">
+            <div class="product-card">
+
+                <a href="#modal4"> <img src="pngegg (5).png" alt="Bag" class="img-fluid product-img"></a>
+            <i class='bx bx-heart favorite-icon'></i>
+
+            <div class="product-info">
+                <h3 class="product-name">Bag</h3>
+                <div class="product-rating">
+                    <span>★★★★★</span>
+                </div>
+                <p class="product-price">$45.00</p>
+                <a href="cart.html" class="add-to-cart btn btn-success">Add to Cart</a>
+            </div>
+        </div>
+        </div>
+        <div class="product col-12 col-sm-6 col-md-4 col-lg-3" data-category="bags">
+            <div class="product-card">
+
+                <a href="#modal5"><img src="pngegg (9).png" alt="Bag" class="img-fluid product-img"></a>
+                <i class='bx bx-heart favorite-icon'></i>     
+               <div class="product-info">
+                <h3 class="product-name">Bag 2</h3>
+                <div class="product-rating">
+                    <span>★★★★☆</span>
+                </div>
+                <p class="product-price">$40.00</p>
+                <a href="cart.html" class="add-to-cart btn btn-success">Add to Cart</a>
+            </div>
+        </div>
+        </div>
+        <div class="product col-12 col-sm-6 col-md-4 col-lg-3" data-category="bags">
+            <div class="product-card">
+
+                <a href="#modal6"> <img src="pngegg (10).png" alt="Bag" class="img-fluid product-img"></a>
+                <i class='bx bx-heart favorite-icon'></i>       
+             <div class="product-info">
+                <h3 class="product-name">Bag 3</h3>
+                <div class="product-rating">
+                    <span>★★★★☆</span>
+                </div>
+                <p class="product-price">$35.00</p>
+                <a href="cart.html" class="add-to-cart btn btn-success">Add to Cart</a>
+            </div>
+        </div>
+        </div>
+
+            <!-- Product 3: Shoes -->
+
+
+        <div class="product col-12 col-sm-6 col-md-4 col-lg-3" data-category="shoes">
+            <div class="product-card">
+                <a href="#modal7"> <img src="pngegg (6).png" alt="Shoes" class="img-fluid product-img"></a>
+                <i class='bx bx-heart favorite-icon'></i>
+                <div class="product-info">
+                    <h3 class="product-name">Shoes 1</h3>
+                    <div class="product-rating">★★★★☆</div>
+                    <p class="product-price">$49.99</p>
+                    <a href="cart.html" class="add-to-cart btn btn-success">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        <div class="product col-12 col-sm-6 col-md-4 col-lg-3" data-category="shoes">
+            <div class="product-card">
+
+                <a href="#modal8"><img src="pngegg (7).png" alt="Bag" class="img-fluid product-img"></a>
+                <i class='bx bx-heart favorite-icon'></i>            <div class="product-info">
+                <h3 class="product-name">Shoes 2</h3>
+                <div class="product-rating">
+                    <span>★★★☆☆</span>
+                </div>
+                <p class="product-price">$55.00</p>
+                <a href="cart.html" class="add-to-cart btn btn-success">Add to Cart</a>
+            </div>
+        </div>
+        </div>
+        <div class="product col-12 col-sm-6 col-md-4 col-lg-3" data-category="shoes">
+            <div class="product-card">
+
+                <a href="#modal9"> <img src="pngegg (8).png" alt="Bag" class="img-fluid product-img"></a>
+                <i class='bx bx-heart favorite-icon'></i>            <div class="product-info">
+                <h3 class="product-name">Shoes 3</h3>
+                <div class="product-rating">
+                    <span>★★★☆☆</span>
+                </div>
+                <p class="product-price">$50.00</p>
+                <a href="cart.html" class="add-to-cart btn btn-success">Add to Cart</a>
+            </div>
+        </div>
+        </div>
+
+
+
+    <!-- Product 4: Cap -->
+
+        <div class="product col-12 col-sm-6 col-md-4 col-lg-3" data-category="Cap">
+            <div class="product-card">
+
+                <img src="pngegg (14).png" alt="Bag" class="img-fluid product-img" style="width: 95px;">
+                            <div class="product-info">
+                <h3 class="product-name">Cap</h3>
+                <div class="product-rating">
+                    <span>★★★☆☆</span>
+                </div>
+                <p class="product-price">$10.00</p>
+                                <!-- Try-on button for cap -->
+
+                <button class="try-on-btn btn btn-primary" data-img="pngegg (14).png">👕 Try now</button>
+
+                <a href="cart.html" class="add-to-cart btn btn-success" style="margin-top: 0px;">Add to Cart</a>
+            </div>
+        </div>
+        </div>
+
+        <!--2-->
+
+        <div class="product col-12 col-sm-6 col-md-4 col-lg-3" data-category="Cap">
+            <div class="product-card">
+
+                <img src="pngegg (22).png" alt="Bag" class="img-fluid product-img">
+                           <div class="product-info">
+                <h3 class="product-name">Cap 2</h3>
+                <div class="product-rating">
+                    <span>★★★☆☆</span>
+                </div>
+                <p class="product-price">$10.00</p>
+                <button class="try-on-btn btn btn-primary" data-img="pngegg (22).png">👕 Try now</button>
+
+                <a href="cart.html" class="add-to-cart btn btn-success" style="margin-top: 0px;">Add to Cart</a>
+            </div>
+        </div>
+        </div>
+
+<!--3-->
+        <div class="product col-12 col-sm-6 col-md-4 col-lg-3" data-category="Cap">
+            <div class="product-card">
+
+                <img src="pngegg (16).png" alt="Bag" class="img-fluid product-img">
+                          <div class="product-info">
+                <h3 class="product-name">Cap 3</h3>
+                <div class="product-rating">
+                    <span>★★★☆☆</span>
+                </div>
+                <p class="product-price">$15.00</p>
+                <button class="try-on-btn btn btn-primary" data-img="pngegg (16).png" >👕 Try now</button>
+
+                <a href="cart.html" class="add-to-cart btn btn-success" style="margin-top: 0px;">Add to Cart</a>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+
+<!-- Modal Popup for each product -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+          <img src="pngegg (11).png" alt="Product 1" class="modal-image">
+            <h2 class="modal-name">T-Shirt 1</h2>
+            <p class="modal-sku">Color:black</p>
+            <p class="modal-availability">Size: Large</p>
+            <p class="modal-price">Price: $19.99</p>    
+          <a href="#" class="close-modal">X</a>
+        </div>
+    </div>
+
+    <!--2-->
+        <div id="modal2" class="modal">
+
+        <div class="modal-content">
+            <img src="pngegg (12).png" alt="Product 1" class="modal-image">
+              <h2 class="modal-name">T-Shirt 2</h2>
+              <p class="modal-sku">Color:white</p>
+              <p class="modal-availability">Size: Large</p>
+              <p class="modal-price">Price: $29.99</p>    
+            <a href="#" class="close-modal">X</a>
+          </div>
+      </div>
+<!--3-->
+      <div id="modal3" class="modal">
+        <div class="modal-content">
+          <img src="pngegg (13).png" alt="Product 1" class="modal-image">
+            <h2 class="modal-name">T-Shirt 3</h2>
+            <p class="modal-sku">Color:blue</p>
+            <p class="modal-availability">Size:X-Large</p>
+            <p class="modal-price">Price: $32.50</p>    
+          <a href="#" class="close-modal">X</a>
+        </div>
+    </div>
+
+<!--4-->
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+          <img src="pngegg (5).png" alt="Product 1" class="modal-image">
+            <h2 class="modal-name">Bag 1</h2>
+            <p class="modal-sku">Color:purple</p>
+            <p class="modal-availability">Size: M</p>
+            <p class="modal-price">Price: $45.00</p>    
+          <a href="#" class="close-modal">X</a>
+        </div>
+    </div>
+<!--5-->
+    <div id="modal5" class="modal">
+        <div class="modal-content">
+          <img src="pngegg (9).png" alt="Product 1" class="modal-image">
+            <h2 class="modal-name">Bag 2</h2>
+            <p class="modal-sku">Color:Pink</p>
+            <p class="modal-availability">Size: M</p>
+            <p class="modal-price">Price: $40.00</p>
+            <a href="#" class="close-modal">X</a>
+        </div>
+    </div>
+<!--6-->
+    <div id="modal6" class="modal">
+        <div class="modal-content">
+          <img src="pngegg (10).png" alt="Product 1" class="modal-image">
+            <h2 class="modal-name">Bag 3</h2>
+            <p class="modal-sku">Color:Black</p>
+            <p class="modal-availability">Size: M</p>
+            <p class="modal-price">Price: $35.00</p>
+            <a href="#" class="close-modal">X</a>
+        </div>
+    </div>
+<!--7-->
+    <div id="modal7" class="modal">
+        <div class="modal-content">
+          <img src="pngegg (6).png" alt="Product 1" class="modal-image">
+            <h2 class="modal-name">Shoes 1</h2>
+            <p class="modal-sku">Color:purple</p>
+            <p class="modal-availability">Size: 42</p>
+            <p class="modal-price">Price: $49.99</p>
+            <a href="#" class="close-modal">X</a>
+        </div>
+    </div>
+<!--8-->
+    <div id="modal8" class="modal">
+        <div class="modal-content">
+          <img src="pngegg (7).png" alt="Product 1" class="modal-image">
+            <h2 class="modal-name">Shoes 2</h2>
+            <p class="modal-sku">Color:blue</p>
+            <p class="modal-availability">Size: 42</p>
+            <p class="modal-price">Price: $55.00</p>
+            <a href="#" class="close-modal">X</a>
+        </div>
+    </div>
+<!--9-->
+    <div id="modal9" class="modal">
+        <div class="modal-content">
+          <img src="pngegg (8).png" alt="Product 1" class="modal-image">
+            <h2 class="modal-name">Shoes 3</h2>
+            <p class="modal-sku">Color:Black</p>
+            <p class="modal-availability">Size: 42</p>
+            <p class="modal-price">Price: $50.00</p>
+            <a href="#" class="close-modal">X</a>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- About Section -->
+<section id="about">
+    <div class="about-container">
+        <!-- Image Section -->
+        <div class="about-image">
+            <img src="evara.webp" alt="Fashion Style">
+        </div>
+
+        <!-- Text Content -->
+        <div class="about-text">
+            <h2>About <span>EVARA</span></h2>
+            <p>Welcome to <b>EVARA</b>, where fashion meets creativity! Our passion is to bring you the latest trends with a touch of uniqueness. Explore a world of style, quality, and innovation.</p>
+            <p>✨ Designed for dreamers, crafted for trendsetters. Be bold, be stylish, be YOU! ✨</p>
+            
+            <!-- Explore More Button -->
+            <a href="#footer" class="explore-btn">Explore More</a>
+        </div>
+    </div>
+</section>
+
+    
+
+
+
+
+
+
+<!-- clothes section -->
+<section class="vehicles" id="vehicles">
+    <div class="swiper vehicles-slider">
+        <h1 class="heading">Popular <span>clothes</span></h1>
+        <div class="swiper-wrapper">
+
+          <!--Clothing 1-->
+            <div class="swiper-slide box">
+                <img src="https://www.ubuy.com.lb/productimg/?image=aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvNjFMWGp0ZDhvMEwuX0FDX1VMMTUwMF8uanBn.jpg" alt="T-Shirt">
+                <div class="content">
+                    <h3>Casual T-Shirt</h3>
+                    <div class="price" style="box-shadow: 0px 2px 0px rgba(124, 123, 123, 0.8) ;"><span> price: </span>$30</div>
+                    <!--Clothing characteristics-->
+                    <p>
+                        NEW
+                        <i class='bx bxs-circle' style="color:#34d399; font-size: 15px;"></i>2024
+                        <i class='bx bxs-circle' style="color:#34d399; font-size: 15px;"></i>Cotton
+                        <i class='bx bxs-circle' style="color:#34d399 ; font-size: 15px;"></i>Available in all sizes
+                        <i class='bx bxs-circle' style="color:#34d399 ; font-size: 15px;"></i>Various colors
+                    </p>
+                    <a href="cart.html" class="add-to-cart btn btn-success">Add to Cart</a>
+                </div>
+            </div>
+
+          <!--Clothing 2-->
+            <div class="swiper-slide box">
+                <img src="https://i.ebayimg.com/images/g/ru0AAOSwHp1k-vm0/s-l1200.jpg" alt="Jacket">
+                <div class="content">
+                    <h3>Leather Jacket</h3>
+                    <div class="price" style="box-shadow: 0px 2px 0px rgba(124, 123, 123, 0.8) ;"><span> price: </span>$150</div>
+                    <!--Clothing characteristics-->
+                    <p>
+                        NEW
+                        <i class='bx bxs-circle' style="color:#34d399 ; font-size: 15px;"></i>2023
+                        <i class='bx bxs-circle' style="color:#34d399 ; font-size: 15px;"></i>Leather
+                        <i class='bx bxs-circle' style="color:#34d399 ; font-size: 15px;"></i>Various sizes
+                        <i class='bx bxs-circle' style="color:#34d399; font-size: 15px;"></i>Black and Brown colors
+                    </p>
+                    <a href="cart.html" class="add-to-cart btn btn-success">Add to Cart</a>
+                </div>
+            </div>
+
+          <!--Clothing 3-->
+            <div class="swiper-slide box">
+                <img src="https://shopduer.com/cdn/shop/files/MFLS3002-Perfromance_Denim_Silm_Heritage_Rinse_0081_R-967121.jpg?v=1715722477" alt="Jeans">
+                <div class="content">
+                    <h3>Denim Jeans</h3>
+                    <div class="price" style="box-shadow: 0px 2px 0px rgba(124, 123, 123, 0.8) ;"><span> price: </span>$50</div>
+                    <!--Clothing characteristics-->
+                    <p>
+                        NEW
+                        <i class='bx bxs-circle' style="color:#34d399 ; font-size: 15px;"></i>2022
+                        <i class='bx bxs-circle' style="color:#34d399 ; font-size: 15px;"></i>Denim
+                        <i class='bx bxs-circle' style="color:#34d399 ; font-size: 15px;"></i>Available in all sizes
+                        <i class='bx bxs-circle' style="color:#34d399 ; font-size: 15px;"></i>Blue color
+                    </p>
+                    <a href="cart.html" class="add-to-cart btn btn-success">Add to Cart</a>
+                </div>
+            </div>
+
+          <!--Clothing 4-->
+            <div class="swiper-slide box">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD-Maf0zyfNPBEWE9oyaUQz176c0Ivor5xuw&s" alt="Sweater">
+                <div class="content">
+                    <h3>Winter Sweater</h3>
+                    <div class="price" style="box-shadow: 0px 2px 0px rgba(124, 123, 123, 0.8) ;"><span> price: </span>$80</div>
+                    <!--Clothing characteristics-->
+                    <p>
+                        NEW
+                        <i class='bx bxs-circle' style="color:#34d399 ; font-size: 15px;"></i>2024
+                        <i class='bx bxs-circle' style="color:#34d399 ; font-size: 15px;"></i>Woolen
+                        <i class='bx bxs-circle' style="color:#34d399; font-size: 15px;"></i>Various sizes
+                        <i class='bx bxs-circle' style="color:#34d399 ; font-size: 15px;"></i>Multiple colors
+                    </p>
+                    <a href="cart.html" class="add-to-cart btn btn-success">Add to Cart</a>
+                </div>
+            </div>
+
+          <!--Clothing 5-->
+            <div class="swiper-slide box">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSALcF4GXLqpE6q-LFg_7sKeSX4U5gm3LwCKA&s" alt="Shoes">
+                <div class="content">
+                    <h3>Running Shoes</h3>
+                    <div class="price" style="box-shadow: 0px 2px 0px rgba(124, 123, 123, 0.8) ;"><span> price: </span>$120</div>
+                    <!--Clothing characteristics-->
+                    <p>
+                        NEW
+                        <i class='bx bxs-circle' style="color:#34d399 ; font-size: 15px;"></i>2023
+                        <i class='bx bxs-circle' style="color:#34d399; font-size: 15px;"></i>Sports
+                        <i class='bx bxs-circle' style="color:#34d399 ; font-size: 15px;"></i>Available in all sizes
+                        <i class='bx bxs-circle' style="color:#34d399; font-size: 15px;"></i>Multiple colors
+                    </p>
+                    <a href="cart.html" class="add-to-cart btn btn-success">Add to Cart</a>
+                </div>
+            </div>
+
+          <!--Clothing 6-->
+            <div class="swiper-slide box">
+                <img src="https://www.gorillawear.com/resize/90838900-covington-bomber-jacket-black-3_11932514445763.jpg/0/1100/True/covington-bomber-jacket-black.jpg" alt="Jacket">
+                <div class="content">
+                    <h3>Bomber Jacket</h3>
+                    <div class="price" style="box-shadow: 0px 2px 0px rgba(124, 123, 123, 0.8) ;"><span> price: </span>$150</div>
+                    <!--Clothing characteristics-->
+                    <p>
+                        NEW
+                        <i class='bx bxs-circle' style="color:#34d399 ; font-size: 15px;"></i>2023
+                        <i class='bx bxs-circle' style="color:#34d399 ; font-size: 15px;"></i>Leather
+                        <i class='bx bxs-circle' style="color:#34d399 ; font-size: 15px;"></i>Various sizes
+                        <i class='bx bxs-circle' style="color:#34d399 ; font-size: 15px;"></i>Multiple colors
+                    </p>
+                    <a href="cart.html" class="add-to-cart btn btn-success">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+
+   <!-- Offers Section -->
+<h1 style="margin-top: 100px; font-size: 77px;">
+    <i class='bx bxs-basket'></i> Offers <i class='bx bxs-basket'></i>
+</h1>
+
+<!-- Product Sections -->
+<div class="product-sections">
+
+    <!-- Hot Releases Section -->
+    <div class="section" id="hot-releases">
+        <h2 class="section-title">Hot Releases</h2>
+
+        <!-- Product 1 -->
+        <div class="product-item">
+            <img src="pngegg (17).png" alt="Floral Print Casual" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Formal suit...</div>
+                <span class="product-price">$238.85</span>
+                <span class="original-price">$345.6</span>
+            </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-item">
+            <img src="pngegg (19).png" alt="Floral Print Casual" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Formal suit...</div>
+                <span class="product-price">$138.85</span>
+                <span class="original-price">$245.6</span>
+            </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-item">
+            <img src="pngegg (20).png" alt="Floral Print Casual" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Shirt...</div>
+                <span class="product-price">$50.85</span>
+                <span class="original-price">$75.6</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Distinctive Bags Section -->
+    <div class="section">
+        <h2 class="section-title">Distinctive Bags</h2>
+
+        <!-- Product 1 -->
+        <div class="product-item">
+            <img src="pngegg (21).png" alt="Floral Print Casual" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Bags...</div>
+                <span class="product-price">$38.85</span>
+                <span class="original-price">$45.6</span>
+            </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-item">
+            <img src="pngegg (9).png" alt="Floral Print Casual" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Bags...</div>
+                <span class="product-price">$48.85</span>
+                <span class="original-price">$55.6</span>
+            </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-item">
+            <img src="pngegg (4).png" alt="Floral Print Casual" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Bags...</div>
+                <span class="product-price">$28.85</span>
+                <span class="original-price">$35.6</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Selling Section -->
+    <div class="section">
+        <h2 class="section-title">Top Selling</h2>
+
+        <!-- Product 1 -->
+        <div class="product-item">
+            <img src="pngegg (16).png" alt="Floral Print Casual" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Distinctive Hat...</div>
+                <span class="product-price">$18.85</span>
+                <span class="original-price">$25.6</span>
+            </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-item">
+            <img src="pngegg (7).png" alt="Floral Print Casual" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Shoes...</div>
+                <span class="product-price">$38.85</span>
+                <span class="original-price">$45.6</span>
+            </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-item">
+            <img src="pngegg (1).png" alt="Floral Print Casual" class="product-image">
+            <div class="product-info">
+                <div class="product-name">T-Shirts...</div>
+                <span class="product-price">$38.85</span>
+                <span class="original-price">$45.6</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trendy Section -->
+    <div class="section">
+        <h2 class="section-title">Trendy</h2>
+
+        <!-- Product 1 -->
+        <div class="product-item">
+            <img src="pngegg (6).png" alt="Floral Print Casual" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Shoes...</div>
+                <span class="product-price">$58.85</span>
+                <span class="original-price">$65.6</span>
+            </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product-item">
+            <img src="pngegg (10).png" alt="Floral Print Casual" class="product-image">
+            <div class="product-info">
+                <div class="product-name">Bags...</div>
+                <span class="product-price">$58.85</span>
+                <span class="original-price">$65.6</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+   
+
+   <!-- Footer Section -->
+<footer class="footer" id="footer">
+    <div class="footer-content">
+
+        <!-- Contact Information -->
+        <div class="footer-contact">
+            <div class="footer-logo">Evara</div>
+            <p>Address: Jib Jenin Main Street</p>
+            <p>Phone: +03 985 643</p>
+            <p>Hours: 10:00 - 18:00, Mon - Sat</p>
+        </div>
+
+        <!-- Navigation Links -->
+        <div class="footer-section">
+            <h3 class="footer-title">NavBar</h3>
+            <ul class="footer-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#popular-categories">Categories</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#vehicles">vehicles</a></li>
+                <li><a href="#hot-releases">Offers</a></li>
+                <li><a href="cart.html">Store</a></li>
+            </ul>
+        </div>
+
+        <!-- User Account Links -->
+        <div class="footer-section">
+            <h3 class="footer-title">My Account</h3>
+            <ul class="footer-links">
+                <li><a href="#">Sign In</a></li>
+                <li><a href="#">View Cart</a></li>
+                <li><a href="#">My Wishlist</a></li>
+                <li><a href="#">Track My Order</a></li>
+            </ul>
+        </div>
+
+        <!-- Payment Gateways Section -->
+        <div class="footer-section">
+            <h3 class="footer-title">Secured Payment Gateways</h3>
+            <div class="payment-cards">
+                <!-- Payment Methods -->
+                <img src="https://pngimg.com/d/visa_PNG30.png" alt="Visa">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/MasterCard_Logo.svg/2560px-MasterCard_Logo.svg.png" alt="Mastercard">
+                <img src="https://www.pngplay.com/wp-content/uploads/5/American-Express-Logo-PNG-Clipart-Background.png" alt="American Express">
+            </div>
+        </div>
+    </div>
+</footer>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    
+
+<!-- Popper.js library, necessary for components like tooltips and popovers in Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+
+<!-- Bootstrap 4 library, used for quickly building responsive and styled web interfaces with pre-made components -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Your custom JavaScript file containing your specific code and functionalities -->
+<script src="script1.js"></script>
+
+
+
+
+
+
+
+
+    <script>
+        // Carousel images
+        document.addEventListener("DOMContentLoaded", () => {
+            const favoriteList = document.getElementById("favorite-list");
+            const favIcon = document.getElementById("fav-icon");
+            const favoriteProducts = new Set();
+            //add event listener to all favorite icons
+            document.querySelectorAll(".favorite-icon").forEach(icon => {
+                icon.addEventListener("click", (event) => {
+                    const product = event.target.closest(".product-card");
+                    if (!product) return; // if the click is not on a product card
+                    
+                    if (favoriteProducts.has(product)) {
+                        favoriteProducts.delete(product);//remove from favorites
+                       
+                        event.target.classList.remove("bx-heart-circle");//change icon
+                        event.target.classList.add("bx-heart");//change icon
+                    } else {
+                        favoriteProducts.add(product);//add to favorites
+                        event.target.classList.remove("bx-heart");//change icon
+                        event.target.classList.add("bx-heart-circle");//change icon
+                    }
+                    updateFavoriteList();//update the favorite list
+                });
+            });
+            //add event listener to the favorite icon
+            favIcon.addEventListener("click", () => {
+                favoriteList.classList.toggle("show");
+            });
+            //update the favorite list
+            function updateFavoriteList() {
+                favoriteList.innerHTML = "";
+                favoriteProducts.forEach(product => {
+                    const clone = product.cloneNode(true);//clone the product card
+                    clone.querySelector(".favorite-icon").remove();//remove the favorite icon
+                    clone.querySelector(".btn").remove();//remove the favorite icon
+                    clone.querySelector(".product-name").remove();//remove the favorite icon
+
+                    favoriteList.appendChild(clone);//add the product card to the favorite list
+                });
+            }
+        });
+
+
+       // add event listener to all try-on buttons
+document.getElementById('fav-icon').addEventListener('click', function() {
+    var favoriteList = document.getElementById('favorite-list');
+    
+    // Show or hide the list of favorite products
+    if (favoriteList.style.display === "none" || favoriteList.style.display === "") {
+        favoriteList.style.display = "flex"; //show the list
+    } else {
+        favoriteList.style.display = "none"; // hide the list
+    }
+
+});
+
+
+
+
+
+/* home login */
+function openPopup() {
+    document.getElementById('loginPopup').style.display = 'flex'; 
+}
+
+function closePopup() {
+    document.getElementById('loginPopup').style.display = 'none'; 
+}
+
+function validateLogin() {
+    const loginButton = document.getElementById("loginButton");
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    if (!email || !password) {
+        alert('Please verify');
+        loginButton.textContent = "Login";
+    } else {
+        alert('You are logged in');
+        
+        // Save email and image data to localStorage
+        localStorage.setItem('email', email);
+        localStorage.setItem('profileImg', 'user-circle-solid-24.png'); // The image link or name can be stored
+        // Change the login button text to the user's email
+        loginButton.innerHTML = `<img src="user-circle-solid-24.png" alt="Profile" class="profile-img" style="width:30px;"> (${email})`;
+    }
+}
+
+// Check if the user is already logged in
+window.onload = function() {
+    const email = localStorage.getItem('email');
+    const profileImg = localStorage.getItem('profileImg');
+    
+    if (email && profileImg) {
+        const loginButton = document.getElementById("loginButton");
+        loginButton.innerHTML = `<img src="${profileImg}" alt="Profile" class="profile-img" style="width:30px;"> (${email})`;
+    }
+}
+
+
+
+   // Toggle between Login and Logout
+   function toggleLoginLogout() {
+        const loginButton = document.getElementById("loginButton");
+        const email = localStorage.getItem('email');
+
+        if (email) {
+            // If already logged in, log out
+            localStorage.removeItem('email');
+            localStorage.removeItem('profileImg');
+            loginButton.innerHTML = 'LOGIN'; // Change button back to "LOGIN"
+            alert('You have logged out');
+        } else {
+            // If not logged in, open login popup
+            openPopup();
+        }
+    }
+
+
+
+
+
+
+/*vehicles-slider*/
+
+var swiper = new Swiper(".vehicles-slider", {  /*A new Swiper object is created, which is a library used to create sliders.*/
+    slidesPerView: 1, /*Specifies the number of slides that are displayed at one time.*/
+    spaceBetween: 20, /*The distance between slices is specified in units (usually pixels).*/
+    loop:true,  /*Specifies whether the slider operates in continuous repeat mode*/
+    grabCursor:true,  /*The cursor turns into a "hand" shape.*/
+    centeredSlides:true, /*The active slide will be in the center.*/
+    autoplay: { /*An object containing the slider's autoplay settings*/
+        delay: 9500,
+        disableOnInteraction: false,
+      },
+    pagination: {  /*An object containing numbering settings*/
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    breakpoints: {  /*An object containing settings for the slider's responsiveness to display changes.*/
+      0: {
+        slidesPerView: 1,
+      },
+      768: {
+        slidesPerView: 2,
+      },
+      991: {
+        slidesPerView: 3,
+      },
+    },
+  });
+
+
+
+
+    </script>
+</body>
+</html>
