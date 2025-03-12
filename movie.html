@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <!-- Links Boxicons for using icons in the project -->
+ <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>  
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .movie-container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 24px;
+            margin: 10px 0;
+        }
+        p {
+            font-size: 18px;
+        }
+        iframe {
+            width: 100%;
+            height: 315px;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+        .movie-poster {
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            height: 700px;
+        }
+        .price,
+        .showtime,
+        .showdate {
+            font-size: 20px;
+            margin-top: 10px;
+            color: green;
+        }
+        .buy-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .buy-button:hover {
+            background-color: #218838;
+        }
+        /* Back to home */
+.back {
+    list-style: none;
+    text-decoration: none;
+    color: #000000;
+    font-size: 25px;
+}
+.back:hover {
+    color: #ff0000;
+    background-color: #fff;
+}
+
+    </style>
+</head>
+<body>
+
+
+    <a href="cinema.html" class="back"><i class='bx bxs-chevron-left-square'></i>Back to Home</a>
+
+    <div class="movie-container" id="movie-details"></div>
+
+    <script>
+     // Movie and YouTube API keys (replace with your own keys)
+const apiKey = "f77c6205"; // OMDb API Key
+const youtubeApiKey = "AIzaSyBMzt24bIgF6xAklrz1iNJKtatRM_z5OQM"; // Replace with your YouTube API key
+
+// Get the movie ID from the URL parameters
+const urlParams = new URLSearchParams(window.location.search);
+const movieId = urlParams.get("id");
+
+// Define custom show dates for each movie
+const movieShowDates = {
+    "Last Action Hero": "October 24, 2025",
+    "Looney Tunes: Back in Action": "November 10, 2025",
+    "Action Jackson": "December 5, 2025",
+    "Class Action": "January 15, 2025",
+    "An Action Hero": "February 22, 2025",
+    "The Bugs Bunny/Looney Tunes Comedy Hour": "October 24, 2025",
+    "King of Comedy": "November 10, 2025",
+    "Louis C.K.: Live at the Comedy Store": "December 5, 2025",
+    "The King of Comedy": "January 15, 2025",
+    "The Original Kings of Comedy": "February 22, 2025",
+    "American Horror Story": "October 24, 2025",
+    "The Amityville Horror": "November 10, 2025",
+    "Masters of Horror": "December 5, 2025",
+    "American Horror Stories": "January 15, 2025",
+    "Nosferatu: A Symphony of Horror": "February 22, 2025",
+};
+
+// Fetch the movie details based on the movieId
+async function getMovieDetails() {
+    if (!movieId) return; // If no movieId is found, exit the function
+    const apiUrl = `https://www.omdbapi.com/?apikey=${apiKey}&i=${movieId}`;
+
+    try {
+        const response = await fetch(apiUrl);
+        const movie = await response.json();
+
+        // If movie details are found, display them
+        if (movie.Response === "True") {
+            displayMovieDetails(movie);
+            getMovieTrailer(movie.Title); // Fetch trailer
+        } else {
+            document.getElementById("movie-details").innerHTML = "<p>Movie not found</p>";
+        }
+    } catch (error) {
+        console.error("Error fetching movie details:", error);
+    }
+}
+
+// Display movie details in the UI
+function displayMovieDetails(movie) {
+    const movieContainer = document.getElementById("movie-details");
+    const moviePrice = getMoviePrice(movie.Title); // Get the price of the movie
+    const showtime = "7:00 PM"; // Set a default showtime for the movie
+    const showdate = movieShowDates[movie.Title] || "TBD"; // Fetch the show date from the movieShowDates or use "TBD"
+
+    movieContainer.innerHTML = `
+        <img src="${movie.Poster}" alt="${movie.Title}" class="movie-poster">
+        <h1>${movie.Title}</h1>
+        <p><strong>📅 Year:</strong> ${movie.Year}</p>
+        <p><strong>⭐ IMDb Rating:</strong> ${movie.imdbRating}</p>
+        <p><strong>🎭 Actors:</strong> ${movie.Actors}</p>
+        <p><strong>🎬 Director:</strong> ${movie.Director}</p>
+        <p><strong>📝 Plot:</strong> ${movie.Plot}</p>
+        <p class="price"><strong>💲 Price:</strong> $${moviePrice}</p>
+        <p class="showtime"><strong>🕖 Show Time:</strong> ${showtime}</p>
+        <p class="showdate"><strong>📅 Show Date:</strong> ${showdate}</p>
+        <button class="buy-button" onclick="bookTicket('${movie.Title}', ${moviePrice}, '${showtime}', '${showdate}')">Book Ticket</button>
+        <div id="trailer"></div> <!-- Trailer will be added here -->
+    `;
+}
+
+// Get the price for the movie based on its title
+function getMoviePrice(movieTitle) {
+    // Example of predefined movie prices (can be adjusted as needed)
+    const moviePrices = {
+        "Last Action Hero": 30,
+        "Looney Tunes: Back in Action": 25,
+        "Action Jackson": 20,
+        "Class Action": 15,
+        "An Action Hero": 18,
+        "The Bugs Bunny/Looney Tunes Comedy Hour": 35,
+        "King of Comedy": 25,
+        "Louis C.K.: Live at the Comedy Store": 20,
+        "The King of Comedy": 15,
+        "The Original Kings of Comedy": 18,
+        "American Horror Story": 35,
+        "The Amityville Horror": 25,
+        "Masters of Horror": 20,
+        "American Horror Stories": 15,
+        "Nosferatu: A Symphony of Horror": 18
+    };
+
+    return moviePrices[movieTitle] || 20; // Default price is $20
+}
+
+// Function to simulate booking a ticket
+function bookTicket(movieTitle, price, showtime, showdate) {
+    alert(`You have successfully booked a ticket for "${movieTitle}" on ${showdate} at ${showtime} for $${price}`);
+}
+
+// Fetch the movie trailer from YouTube based on the movie title
+async function getMovieTrailer(title) {
+    const youtubeUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${title} official trailer&type=video&key=${youtubeApiKey}`;
+
+    try {
+        const response = await fetch(youtubeUrl);
+        const data = await response.json();
+
+        if (data.items.length > 0) {
+            const videoId = data.items[0].id.videoId;
+            document.getElementById("trailer").innerHTML = ` 
+                <h2>🎬 Watch Trailer</h2>
+                <iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>
+            `;
+        } else {
+            document.getElementById("trailer").innerHTML = "<p>No trailer available</p>";
+        }
+    } catch (error) {
+        console.error("Error fetching trailer:", error);
+    }
+}
+
+// Run the movie details fetching when the page is loaded
+getMovieDetails();
+
+    </script>
+
+</body>
+</html>
